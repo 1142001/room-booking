@@ -7,38 +7,65 @@ import MyBookings from "./pages/MyBookings";
 import AdminDashboard from "./pages/AdminDashboard";
 import ManageRooms from "./pages/ManageRooms";
 import ManageBookings from "./pages/ManageBookings";
+
 import PrivateRoute from "./components/PrivateRoute";
 import AdminRoute from "./components/AdminRoute";
-
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
 
-        <Route path="/" element={<Home />} />
+        {/* Public Routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/my-bookings" element={<MyBookings />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/rooms" element={<ManageRooms />} />
-        <Route path="/admin/bookings" element={<ManageBookings />} />
+
+        {/* User Protected Routes */}
         <Route
-path="/"
-  element={
-    <PrivateRoute>
-      <Home />
-    </PrivateRoute>
-  }
-/>
-<Route
-  path="/admin"
-  element={
-    <AdminRoute>
-      <AdminDashboard />
-    </AdminRoute>
-  }
-/>
+          path="/"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/my-bookings"
+          element={
+            <PrivateRoute>
+              <MyBookings />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Admin Protected Routes */}
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <AdminDashboard />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/rooms"
+          element={
+            <AdminRoute>
+              <ManageRooms />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/bookings"
+          element={
+            <AdminRoute>
+              <ManageBookings />
+            </AdminRoute>
+          }
+        />
 
       </Routes>
     </BrowserRouter>
